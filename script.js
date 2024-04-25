@@ -13,7 +13,7 @@ $('input:text').addClass("ui-widget ui-widget-content ui-corner-all ui-textfield
 function setCookie(cname,cvalue,exdays)
 {
   var d = new Date();
-  d.setTime(d.getTime()+(exdays*24*60*60*10+8*60*60*10));   // 因為是毫秒, 所以要乘以1000
+  d.setTime(d.getTime()+(exdays*24*60*60*1+8*60*60*1));   // 因為是毫秒, 所以要乘以1000
   var expires = "expires="+d.toGMTString();
   document.cookie = cname + "=" + cvalue + "; " + expires;
 }
@@ -83,12 +83,12 @@ async function startVideo(){
   await navigator.mediaDevices.getUserMedia({video: {}},)   
     .then(function(stream){
       console.log("setting")
-      video1.setAttribute("autoplay", "true");
-      video1.setAttribute("playsinline", "true");
-      video1.setAttribute("muted", "true");
-      video1.setAttribute("loop", "true");
+      video2.setAttribute("autoplay", "true");
+      video2.setAttribute("playsinline", "true");
+      video2.setAttribute("muted", "true");
+      video2.setAttribute("loop", "true");
       //video1.setAttribute("controls", "true");
-      video1.srcObject = stream;
+      video2.srcObject = stream;
     })
     await video1.play();
     recognizeFaces()
