@@ -13,7 +13,7 @@ $('input:text').addClass("ui-widget ui-widget-content ui-corner-all ui-textfield
 function setCookie(cname,cvalue,exdays)
 {
   var d = new Date();
-  d.setTime(d.getTime()+(exdays*24*60*60*1+8*60*60*1));   // 因為是毫秒, 所以要乘以1000
+  d.setTime(d.getTime()+(exdays*24*60*60*1000+8*60*60*1000));   // 因為是毫秒, 所以要乘以1000
   var expires = "expires="+d.toGMTString();
   document.cookie = cname + "=" + cvalue + "; " + expires;
 }
@@ -112,17 +112,17 @@ function recognizeFaces(){
     document.body.append(canvas)
     canvas.style.left = getPosition(video1)["x"] + "px";
     canvas.style.top = getPosition(video1)["y"] + "px";
-    displaySize = { width: video1.offsetWidth, height: video1.offsetHeight }
+    displaySize = { width: video2.offsetWidth, height: video1.offsetHeight }
     faceapi.matchDimensions(canvas, displaySize)
     setInterval(async () => {
-    inputtext.style.width = video1.offsetWidth.toString()+"px"
-    inputtext.style.height = video1.offsetHeight.toString()/8+"px"
-    inputtextUser.style.width = video1.offsetWidth.toString()+"px"
-    inputtextUser.style.height = video1.offsetHeight.toString()/8+"px"
-    displaySize = { width: video1.offsetWidth, height: video1.offsetHeight }
+    inputtext.style.width = video2.offsetWidth.toString()+"px"
+    inputtext.style.height = video2.offsetHeight.toString()/8+"px"
+    inputtextUser.style.width = video2.offsetWidth.toString()+"px"
+    inputtextUser.style.height = video2.offsetHeight.toString()/8+"px"
+    displaySize = { width: video2.offsetWidth, height: video1.offsetHeight }
     faceapi.matchDimensions(canvas, displaySize)
     // 年紀性別
-    const detections = await faceapi.detectAllFaces(video1, new faceapi.TinyFaceDetectorOptions()).withAgeAndGender()          
+    const detections = await faceapi.detectAllFaces(video2, new faceapi.TinyFaceDetectorOptions()).withAgeAndGender()          
     // 得到的結果
     const resizedDetections = faceapi.resizeResults(detections, displaySize)
     start = new Date().getTime();
@@ -132,7 +132,7 @@ function recognizeFaces(){
         box = resizedDetections[0]['detection']['_box']  
         gender = resizedDetections[0]['gender']          // 性別
         //console.log(start-end)
-        if(start-end >=2000){
+        if(start-end >=1000){
            console.log("send to adafruit")
            
             $.ajax({
