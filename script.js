@@ -13,7 +13,7 @@ $('input:text').addClass("ui-widget ui-widget-content ui-corner-all ui-textfield
 function setCookie(cname,cvalue,exdays)
 {
   var d = new Date();
-  d.setTime(d.getTime()+(exdays*24*60*60*1000+8*60*60*1000));   // 因為是毫秒, 所以要乘以1000
+  d.setTime(d.getTime()+(exdays*24*60*60*10+8*60*60*10));   // 因為是毫秒, 所以要乘以1000
   var expires = "expires="+d.toGMTString();
   document.cookie = cname + "=" + cvalue + "; " + expires;
 }
